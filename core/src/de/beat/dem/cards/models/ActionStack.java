@@ -9,10 +9,19 @@ import com.badlogic.gdx.utils.Array;
 public class ActionStack {
     public Array<Card> cards;
     public final Array<Player> players;
-    private Player currentPlayer;
+    private int currentPlayer;
 
     public ActionStack(final Array<Player> players){
         this.players = players;
-        this.currentPlayer = players.get(0);
+        this.currentPlayer = 0;
     }
+
+    public void proceed(){
+        int enemy = currentPlayer == 0 ? 1:0;
+
+        for(Card card : cards){
+            players.get(enemy).hitPoints -= card.attack;
+        }
+    }
+
 }
