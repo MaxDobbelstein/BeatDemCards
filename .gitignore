@@ -1,3 +1,5 @@
+*.iml
+
 # built application files
 *.apk
 *.ap_
@@ -34,3 +36,4 @@ proguard/
 build/
 bin/
 
+/.nb-gradle/
