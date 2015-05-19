@@ -1,12 +1,17 @@
 package de.beat.dem.cards.screens;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.utils.Array;
 import de.beat.dem.cards.BeatDemCards;
 import de.beat.dem.cards.models.ActionStack;
 import de.beat.dem.cards.models.Card;
 import de.beat.dem.cards.models.Player;
+import de.beat.dem.cards.views.PlayerView;
 
 /**
  * Created by mkvr on 19.05.15.
@@ -15,7 +20,8 @@ public class MoveScreen implements Screen {
     private final BeatDemCards beatDemCards;
     private OrthographicCamera camera;
     private ActionStack actionStack;
-
+    private PlayerView playerView;
+    private PlayerView playerView2;
 
     public MoveScreen(final BeatDemCards beatDemCards){
         this.beatDemCards = beatDemCards;
@@ -40,6 +46,8 @@ public class MoveScreen implements Screen {
         players.add(playerTwo);
 
         actionStack = new ActionStack(players);
+        playerView = new PlayerView();
+        playerView2 = new PlayerView();
     }
 
     @Override
@@ -49,18 +57,27 @@ public class MoveScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
         camera.update();
         beatDemCards.batch.setProjectionMatrix(camera.combined);
 
         beatDemCards.batch.begin();
         beatDemCards.bitmapFont.draw(beatDemCards.batch, "Player" + String.valueOf(actionStack.players.get(0).playerNo), 100, 100);
-        beatDemCards.bitmapFont.draw(beatDemCards.batch, "Hitpoints" + String.valueOf(actionStack.players.get(0).hitPoints), 100, 200);
+        beatDemCards.bitmapFont.draw(beatDemCards.batch, "Hitpoints" + String.valueOf(actionStack.players.get(0).hitPoints), 100, 85);
+        beatDemCards.bitmapFont.draw(beatDemCards.batch, "Movepoints" + String.valueOf(actionStack.players.get(0).hitPoints), 100, 70);
+        beatDemCards.batch.draw(playerView.getCurrentFrame(), 100, 200);
 
         beatDemCards.bitmapFont.draw(beatDemCards.batch, "Player" + String.valueOf(actionStack.players.get(1).playerNo), 400, 100);
-        beatDemCards.bitmapFont.draw(beatDemCards.batch, "Hitpoints" + String.valueOf(actionStack.players.get(1).hitPoints), 400, 200);
+        beatDemCards.bitmapFont.draw(beatDemCards.batch, "Hitpoints" + String.valueOf(actionStack.players.get(1).hitPoints), 400, 85);
+        beatDemCards.bitmapFont.draw(beatDemCards.batch, "Movepoints" + String.valueOf(actionStack.players.get(0).hitPoints), 400, 70);
+
+        /*draw (Texture texture, float x, float y, float width, float height, int srcX, int srcY, int srcWidth,
+        int srcHeight, boolean flipX, boolean flipY)*/
+
+        beatDemCards.batch.draw(playerView2.getCurrentFrame(), 400, 200,
+                ((float) -playerView2.getCurrentFrame().getRegionWidth()), ((float) playerView2.getCurrentFrame().getRegionHeight()));
 
         beatDemCards.batch.end();
-
     }
 
     @Override
