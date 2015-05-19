@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import de.beat.dem.cards.BeatDemCards;
 import de.beat.dem.cards.models.ActionStack;
@@ -65,7 +66,7 @@ public class MoveScreen implements Screen {
         beatDemCards.bitmapFont.draw(beatDemCards.batch, "Player" + String.valueOf(actionStack.players.get(0).playerNo), 100, 100);
         beatDemCards.bitmapFont.draw(beatDemCards.batch, "Hitpoints" + String.valueOf(actionStack.players.get(0).hitPoints), 100, 85);
         beatDemCards.bitmapFont.draw(beatDemCards.batch, "Movepoints" + String.valueOf(actionStack.players.get(0).hitPoints), 100, 70);
-        beatDemCards.batch.draw(playerView.getCurrentFrame(), 100, 200);
+        beatDemCards.batch.draw(playerView.getCurrentFrame(delta), 100, 200);
 
         beatDemCards.bitmapFont.draw(beatDemCards.batch, "Player" + String.valueOf(actionStack.players.get(1).playerNo), 400, 100);
         beatDemCards.bitmapFont.draw(beatDemCards.batch, "Hitpoints" + String.valueOf(actionStack.players.get(1).hitPoints), 400, 85);
@@ -73,9 +74,9 @@ public class MoveScreen implements Screen {
 
         /*draw (Texture texture, float x, float y, float width, float height, int srcX, int srcY, int srcWidth,
         int srcHeight, boolean flipX, boolean flipY)*/
-
-        beatDemCards.batch.draw(playerView2.getCurrentFrame(), 400, 200,
-                ((float) -playerView2.getCurrentFrame().getRegionWidth()), ((float) playerView2.getCurrentFrame().getRegionHeight()));
+        TextureRegion currentFrame = playerView2.getCurrentFrame(delta);
+        beatDemCards.batch.draw(currentFrame, 400, 200,
+                ((float) -currentFrame.getRegionWidth()), ((float) currentFrame.getRegionHeight()));
 
         beatDemCards.batch.end();
     }

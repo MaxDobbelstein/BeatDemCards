@@ -32,9 +32,9 @@ public class PlayerView {
         stateTime = 0f;
     }
 
-    public TextureRegion getCurrentFrame(){
-        stateTime += Gdx.graphics.getDeltaTime();
-        return stanceAnimation.getKeyFrame(stateTime, true);
+    public TextureRegion getCurrentFrame(float stateTime){
+        this.stateTime += stateTime;
+        return stanceAnimation.getKeyFrame(this.stateTime, true);
     }
 
 }
