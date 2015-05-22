@@ -12,6 +12,7 @@ import de.beat.dem.cards.BeatDemCards;
 import de.beat.dem.cards.models.ActionStack;
 import de.beat.dem.cards.models.Card;
 import de.beat.dem.cards.models.Player;
+import de.beat.dem.cards.views.CardView;
 import de.beat.dem.cards.views.PlayerView;
 
 /**
@@ -23,15 +24,17 @@ public class MoveScreen implements Screen {
     private ActionStack actionStack;
     private PlayerView playerView;
     private PlayerView playerView2;
+    private Array<CardView> currentCards;
+    private Array<CardView> currentCards2;
 
     public MoveScreen(final BeatDemCards beatDemCards){
         this.beatDemCards = beatDemCards;
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 640, 480);
-        Card cardOneKick = new Card("treten", 5, 1, 20);
-        Card cardOneHit = new Card("schlagen", 2, 5, 10);
-        Card cardTwoKick = new Card("treten", 5, 1, 20);
-        Card cardTwoHit = new Card("schlagen", 2, 5, 10);
+        Card cardOneKick = new Card("treten","kick", 5, 1, 20);
+        Card cardOneHit = new Card("schlagen", "punch", 2, 5, 10);
+        Card cardTwoKick = new Card("treten", "kick", 5, 1, 20);
+        Card cardTwoHit = new Card("schlagen","punch", 2, 5, 10);
         Array<Card> cardOne = new Array<Card>();
         cardOne.add(cardOneKick);
         cardOne.add(cardOneHit);
@@ -49,6 +52,16 @@ public class MoveScreen implements Screen {
         actionStack = new ActionStack(players);
         playerView = new PlayerView();
         playerView2 = new PlayerView();
+        
+        currentCards = new Array<CardView>();
+        currentCards2 = new Array<CardView>();
+        
+        for(Card currCard : cardOne){
+            currentCards.add(new CardView(currCard.cardName));
+        }
+        for(Card currCard : cardTwo){
+            currentCards2.add(new CardView(currCard.cardName));
+        }
     }
 
     @Override
@@ -71,7 +84,19 @@ public class MoveScreen implements Screen {
         beatDemCards.bitmapFont.draw(beatDemCards.batch, "Player" + String.valueOf(actionStack.players.get(1).playerNo), 400, 100);
         beatDemCards.bitmapFont.draw(beatDemCards.batch, "Hitpoints" + String.valueOf(actionStack.players.get(1).hitPoints), 400, 85);
         beatDemCards.bitmapFont.draw(beatDemCards.batch, "Movepoints" + String.valueOf(actionStack.players.get(0).hitPoints), 400, 70);
-
+        
+        int offset = 0;
+        for(CardView currCard : currentCards){
+            beatDemCards.batch.draw(currCard.cardImage, 0 + offset, 300,128, 96);
+            offset +=133;
+        }
+        offset =0;
+        for(CardView currCard : currentCards2){
+            beatDemCards.batch.draw(currCard.cardImage, 300  + offset, 300, 128, 96);
+            offset +=133;
+        }
+        
+        
         /*draw (Texture texture, float x, float y, float width, float height, int srcX, int srcY, int srcWidth,
         int srcHeight, boolean flipX, boolean flipY)*/
         TextureRegion currentFrame = playerView2.getCurrentFrame(delta);
