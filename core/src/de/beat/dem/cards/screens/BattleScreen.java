@@ -112,6 +112,9 @@ public class BattleScreen implements Screen {
         float width = playerNumber == PlayerNumber.One ? currentFrame.getRegionWidth() : -currentFrame.getRegionWidth();
         float height = currentFrame.getRegionHeight();
 
+        width *= 1.5;
+        height *= 1.5;
+
         beatDemCards.batch.draw(currentFrame, xPosition, yPosition, width, height);
     }
 
