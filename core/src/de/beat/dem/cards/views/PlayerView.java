@@ -19,16 +19,15 @@ public class PlayerView {
     private float stateTime;
 
     public PlayerView(){
-        texture = new Texture(Gdx.files.internal(ASSETNAME)); // #9
+        texture = new Texture(Gdx.files.internal(ASSETNAME));
 
-        TextureRegion[][] tmp = TextureRegion.split(texture, texture.getWidth()/COLS, texture.getHeight()/ROWS);              // #10
+        TextureRegion[][] tmp = TextureRegion.split(texture, texture.getWidth()/COLS, texture.getHeight()/ROWS);
         frames = new TextureRegion[COLS];
 
         for (int j = 0; j < COLS; j++)
-                frames[j] = tmp[0][j];
+            frames[j] = tmp[0][j];
 
-
-        stanceAnimation = new Animation(0.1f, frames);      // #11
+        stanceAnimation = new Animation(0.1f, frames);
         stateTime = 0f;
     }
 

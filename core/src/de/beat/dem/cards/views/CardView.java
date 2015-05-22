@@ -15,10 +15,11 @@ import de.beat.dem.cards.models.Card;
  */
 
 public class CardView {
-    
-    public final Texture cardImage;
+
+    public final Texture CARDIMAGE;
+    private final String FILETYPE = ".png";
     
     public CardView(String cardName){
-        cardImage = new Texture(Gdx.files.internal(cardName +".png"));
+        CARDIMAGE = new Texture(Gdx.files.internal(cardName + FILETYPE));
     }
 }
