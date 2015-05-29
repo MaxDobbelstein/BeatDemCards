@@ -18,9 +18,9 @@ import de.beat.dem.cards.views.PlayerView;
  * Created by mkvr on 19.05.15.
  */
 public class BattleScreen implements Screen {
-    public static final String PLAYER = "Player";
-    public static final String HITPOINTS = "Hitpoints";
-    public static final String MOVEPOINTS = "Movepoints";
+    private static final String PLAYER = "Player";
+    private static final String HITPOINTS = "Hitpoints";
+    private static final String MOVEPOINTS = "Movepoints";
     private static int RESOLUTIONWIDTH = 800;
     private static int RESOLUTIONHEIGHT = 600;
 
@@ -29,8 +29,8 @@ public class BattleScreen implements Screen {
     private static int YPOSITION = 100;
     private static int ROWHEIGHT = 15;
 
-    private final int CARDHEIGHT = 128;
-    private final int CARDWIDTH = 64;
+    private static final int CARDHEIGHT = 128;
+    private static final int CARDWIDTH = 64;
 
     private final BeatDemCards beatDemCards;
     private OrthographicCamera camera;
