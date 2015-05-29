@@ -17,6 +17,15 @@ public class PlayerView {
     private Texture texture;
     private TextureRegion[] frames;
     private float stateTime;
+    
+    public int xPosition;
+    public int yPosition;
+    public int width;
+    public int height;
+    
+    public boolean flipX = false;
+    public boolean flipY = false;
+    
 
     public PlayerView(){
         texture = new Texture(Gdx.files.internal(ASSETNAME));
@@ -27,13 +36,17 @@ public class PlayerView {
         for (int j = 0; j < COLS; j++)
             frames[j] = tmp[0][j];
 
-        stanceAnimation = new Animation(0.1f, frames);
+        width = texture.getWidth()/COLS;
+        height = texture.getHeight()/ROWS;
+        
+        stanceAnimation = new Animation(0.2f, frames);
         stateTime = 0f;
     }
 
     public TextureRegion getCurrentFrame(float stateTime){
         this.stateTime += stateTime;
-        return stanceAnimation.getKeyFrame(this.stateTime, true);
+        TextureRegion texReg = stanceAnimation.getKeyFrame(this.stateTime, true);
+        return texReg;
     }
 
 }

@@ -19,6 +19,9 @@ public class CardView {
     public final Texture CARDIMAGE;
     private final String FILETYPE = ".png";
     
+    public int xPosition, yPosition;
+    public int width, height;
+    
     public CardView(String cardName){
         CARDIMAGE = new Texture(Gdx.files.internal(cardName + FILETYPE));
     }
